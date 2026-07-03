@@ -19,14 +19,14 @@ fn main() {
 
         .on_submit(|ui, choice: &str| {
             ui.set_user_data(choice.to_string());
-            
+            ui.call_on_name("menu0", |menu_zero: &mut SelectView<&str>| menu_zero.disable() );
             ui.call_on_name("menu", |menu_wrapper: &mut HideableView<PaddedView<SelectView<&str>>>| {
                 menu_wrapper.unhide();
                 //menu_wrapper.get_inner_mut().enable();
             });
             ui.focus_name("menu");
         }
-    );
+    ).with_name("menu0");
 
     let list2 = SelectView::new()
         .item("blank", "")
@@ -35,12 +35,12 @@ fn main() {
         .item("colon three", ":3")
 
         .on_submit(|ui, choice: &str| {
-            let mut output = ui.take_user_data().unwrap_or("error!").to_string();
+            let mut output = ui.take_user_data().unwrap_or("error!".to_string()).to_string();
             output.push_str(choice);
             ui.set_user_data(output);
             ui.quit();
         }
-    ).with_name("menu0");
+    );
 
     let list2wrap = HideableView::new(PaddedView::new(Margins::tb(1, 0), list2)).hidden().with_name("menu");
 
