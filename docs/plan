@@ -2,4 +2,5 @@
 [X] Parsing custom command directory
 [ ] Executing custom command lists
 [ ] Integrate as a display manager
+[ ] Optionaly appending scripts
 
