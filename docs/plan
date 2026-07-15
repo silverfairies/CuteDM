@@ -1,6 +1,8 @@
-[X] Executing commands from choice
-[X] Parsing custom command directory
-[ ] Executing custom command lists
+[X] Executing scripts from choice
+[X] Parsing custom script directory
+[X] UI
+[ ] Executing custom script lists
 [ ] Integrate as a display manager
-[ ] Optionaly appending scripts
+[ ] Instarctions for execution of scripts
+[ ] JSON?
 

@@ -20,7 +20,7 @@ cargo build --release
 ```sh
 cutedm /path/to/directory
 ```
-A directory is a tree of shell scripts. Each script has the extension .sh and, if it needs further choices, a directory with the same name as the script **without the .sh extension**. Scripts beginning with . are ignored. If you want to make a sublist without a script you can use ```bash mkdir list; touch list.sh```. An example of a tree is available in examples.
+A directory is a tree of shell scripts. Each script has the extension .sh and, if it needs further choices, a directory with the same name as the script **without the .sh extension**. Scripts beginning with . are ignored. If you want to make a sublist without a script you can use ```mkdir list; touch list.sh```. An example of a tree is available in examples.
 
 ## Contributing
 

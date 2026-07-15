@@ -8,11 +8,11 @@ use std::{
     path::PathBuf,
 };
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Choice {
-    name: String,
-    path: PathBuf,
-    subchoices: Option<Vec<Choice>>,
+    pub name: String,
+    pub path: PathBuf,
+    pub subchoices: Vec<Choice>,
 }
 
 impl Choice {
@@ -26,15 +26,15 @@ impl Choice {
             .unwrap_or("Invalid option")
             .to_string();
 
-        let subchoices: Option<Vec<Choice>> =
+        let subchoices: Vec<Choice> =
             if path.with_file_name(&name).exists() && path.with_file_name(&name).is_dir() {
                 if let Result::Ok(entries) = path.with_file_name(&name).read_dir() {
-                    Self::read_tree(entries).ok()
+                    Self::read_tree(entries).unwrap_or(Vec::new())
                 } else {
-                    None
+                    vec![]
                 }
             } else {
-                None
+                vec![]
             };
 
         Self {
@@ -56,14 +56,10 @@ impl Choice {
                 )
             })
             .peekable();
-        if files_filtered.peek().is_none() {
-            Err(Error::other("Empty Directory"))
-        } else {
-            for script in files_filtered {
-                output.push(Choice::new(script?.path()));
-            }
-
-            Ok(output)
+        for script in files_filtered {
+            output.push(Choice::new(script?.path()));
         }
+
+        Ok(output)
     }
 }
