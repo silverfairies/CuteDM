@@ -4,6 +4,7 @@ use std::{
     fs::{DirEntry, ReadDir},
     io::Error,
     iter::Peekable,
+    os::unix::ffi::OsStrExt,
     path::PathBuf,
 };
 
@@ -51,6 +52,7 @@ impl Choice {
                 Ok(entry)
                 if entry.path().is_file()
                 && entry.path().extension().unwrap_or_default().eq("sh")
+                && entry.path().file_name().unwrap_or_default().as_bytes()[0] != b'.'
                 )
             })
             .peekable();

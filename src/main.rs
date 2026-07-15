@@ -86,7 +86,8 @@ fn main() -> Result<(), Error> {
     println!(
         "{:#?}",
         Choice::read_tree(
-            PathBuf::from("/home/argentum/Documents/Projects/Rust/cutedm/tmp").read_dir()?
+            PathBuf::from("/home/argentum/Documents/Projects/Rust/cutedm/examples/tree")
+                .read_dir()?
         )?
     );
     Ok(())
