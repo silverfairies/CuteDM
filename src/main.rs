@@ -1,15 +1,11 @@
-use std::{io::Error, path::PathBuf, process::Command};
+use std::{env, io::Error, path::PathBuf};
 
-use cursive::{
-    Cursive, CursiveExt,
-    theme::{BaseColor, BorderStyle, Color, Palette, PaletteColor, Theme},
-    view::{Margins, Nameable},
-    views::{self, HideableView, LinearLayout, PaddedView, Panel, SelectView, TextView},
-};
+use cursive::CursiveExt;
 
 use crate::mapper::Choice;
 
 mod mapper;
+mod ui;
 
 fn main() -> Result<(), Error> {
     /*
@@ -83,27 +79,17 @@ fn main() -> Result<(), Error> {
         .spawn();
     */
 
-    println!(
-        "{:#?}",
-        Choice::read_tree(
-            PathBuf::from("/home/argentum/Documents/Projects/Rust/cutedm/examples/tree")
-                .read_dir()?
-        )?
-    );
-    Ok(())
-}
+    let tree = Choice::read_tree(PathBuf::from("examples/tree").read_dir()?)?;
 
-#[allow(unused)]
-fn theme_constructor() -> Theme {
-    let mut theme = Theme {
-        shadow: false,
-        borders: BorderStyle::Outset,
-        palette: Palette::terminal_default(),
-    };
-    theme.palette[PaletteColor::Background] = Color::Dark(BaseColor::Black);
-    theme.palette[PaletteColor::Primary] = Color::Dark(BaseColor::White);
-    theme.palette[PaletteColor::View] = Color::Dark(BaseColor::Black);
-    theme
+    /*println!(
+        "{:#?}",
+        &tree
+    );*/
+
+    let mut ui = ui::construct_ui(tree);
+    ui.run();
+    println!("{:#?}", ui.take_user_data::<Vec<Choice>>());
+    Ok(())
 }
 
 //struct Environment {
