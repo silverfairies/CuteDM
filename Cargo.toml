@@ -1,7 +1,22 @@
 [package]
 name = "CuteDM"
-version = "0.1.0"
+version = "0.1.0-alpha"
+authors = ["Melissa Vernigorenko"]
 edition = "2024"
+repository = "https://github.com/silverfairies/CuteDM"
+license = "MIT"
 
 [dependencies]
 cursive = { version = "0.21.1", default-features = false, features = ["toml", "crossterm-backend"] }
+
+[profile.dev.package."*"]
+opt-level = 3
+codegen-units = 1
+
+[profile.release]
+panic = "abort"
+lto = "fat"
+codegen-units = 1
+strip = true
+debug = 0
+opt-level = "z"
