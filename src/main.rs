@@ -1,4 +1,4 @@
-use std::{env, io::Error, path::PathBuf};
+use std::{env, io::Error, path::PathBuf, process::Command};
 
 use cursive::CursiveExt;
 
@@ -79,7 +79,7 @@ fn main() -> Result<(), Error> {
         .spawn();
     */
 
-    let tree = Choice::read_tree(PathBuf::from("examples/tree").read_dir()?)?;
+    let tree = Choice::read_tree(PathBuf::from("./examples/tree").read_dir()?)?;
 
     /*println!(
         "{:#?}",
@@ -88,7 +88,19 @@ fn main() -> Result<(), Error> {
 
     let mut ui = ui::construct_ui(tree);
     ui.run();
-    println!("{:#?}", ui.take_user_data::<Vec<Choice>>());
+
+    let tree = ui.take_user_data::<Vec<Choice>>().unwrap_or_default();
+    println!("{:#?}", &tree);
+    let _ = execute_scripts(tree);
+    Ok(())
+}
+
+fn execute_scripts ( sequence: Vec<Choice> ) -> Result<(), Error> {
+    for script in sequence {
+        let _ = Command::new(script.path.canonicalize()?.to_str().unwrap_or("echo Some error occured!"))
+            .spawn();
+            //.args([format!("\"{}\"", script.path.canonicalize()?.to_str().unwrap_or("echo Some error occured!")).as_str()])
+    }
     Ok(())
 }
 
