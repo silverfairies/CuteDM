@@ -10,10 +10,10 @@ mod ui;
 fn main() -> Result<(), Error> {
     let mut args = env::args();
     let tree = args.nth(1);
-    if tree.is_none_or(|path| !PathBuf::from(path).is_dir()) {
+    if tree.as_ref().is_none_or(|path| !PathBuf::from(path).is_dir()) {
         println!("Specify a valid directory!");
     } else {
-        let tree = Choice::read_tree(PathBuf::from("./examples/tree").read_dir()?)?;
+        let tree = Choice::read_tree(PathBuf::from(tree.unwrap()).read_dir()?)?;
         let mut ui = ui::construct_ui(tree);
         ui.run();
 
