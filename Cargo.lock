@@ -3,13 +3,6 @@
 version = 4
 
 [[package]]
-name = "CuteDM"
-version = "0.1.0-alpha"
-dependencies = [
- "cursive",
-]
-
-[[package]]
 name = "ahash"
 version = "0.8.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -159,6 +152,13 @@ dependencies = [
  "unicode-segmentation",
  "unicode-width 0.2.2",
  "xi-unicode",
+]
+
+[[package]]
+name = "cutedm"
+version = "0.1.0-alpha"
+dependencies = [
+ "cursive",
 ]
 
 [[package]]

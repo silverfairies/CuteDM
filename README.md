@@ -16,6 +16,10 @@ git clone https://github.com/silverfairies/CuteDM
 cd CuteDM
 cargo build --release
 ```
+To install into $HOME/.cargo:
+```sh
+cargo install --path .
+```
 
 ## Usage
 
