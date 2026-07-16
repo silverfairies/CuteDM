@@ -1,8 +1,8 @@
 [X] Executing scripts from choice
 [X] Parsing custom script directory
 [X] UI
-[ ] Executing custom script lists
+[X] Executing custom script lists
 [ ] Integrate as a display manager
-[ ] Instarctions for execution of scripts
+[ ] Instructions for execution of scripts
 [ ] JSON?
 

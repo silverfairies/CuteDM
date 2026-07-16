@@ -1,3 +1,3 @@
 #!/bin/sh
 
-fuzzel --mesg=meow!!
+echo $TERM

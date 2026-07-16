@@ -1,5 +1,8 @@
 use cursive::{
-    Cursive, CursiveExt, reexports::enumset::__internal::set::new, theme::{BaseColor, BorderStyle, Color, Palette, PaletteColor, Theme}, view::{Margins, Nameable, ViewWrapper}, views::{self, HideableView, LinearLayout, NamedView, PaddedView, Panel, SelectView, TextView}
+    Cursive,
+    theme::{BaseColor, BorderStyle, Color, Palette, PaletteColor, Theme},
+    view::{Nameable, ViewWrapper},
+    views::{NamedView, Panel, SelectView},
 };
 
 use crate::mapper::Choice;
@@ -37,7 +40,7 @@ pub fn construct_ui(tree: Vec<Choice>) -> Cursive {
 
     let menu = list.with_name("menu");
 
-    ui.add_layer(menu);
+    ui.add_layer(Panel::new(menu).title("CuteDM"));
 
     ui
 }
